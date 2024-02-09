@@ -113,8 +113,6 @@ public class PersonalizedPredictionLSTM {
             inference += outputs[0][0] * MODEL_WEIGHTS[interpreters.indexOf(interpreter)];
         }
 
-
-
         return inference;
     }
 

@@ -18,11 +18,12 @@ import java.util.Date;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ThreadLocalRandom;
 
-import edu.txstate.reu.ble.Event;
+//import edu.txstate.reu.ble.Event;
 import com.example.wear.Database.Couchbase;
 import com.example.wear.Database.Database;
 import com.example.wear.config.ModelConfig;
 import com.example.wear.config.SmartFallConfig;
+import com.example.wear.util.Event;
 
 
 /**

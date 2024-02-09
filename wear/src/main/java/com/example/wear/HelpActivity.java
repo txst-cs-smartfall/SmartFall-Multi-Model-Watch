@@ -12,8 +12,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.wear.ambient.AmbientModeSupport;
 
-import edu.txstate.reu.ble.BluetoothLe;
-
 public class HelpActivity extends AppCompatActivity implements AmbientModeSupport.AmbientCallbackProvider {
 
 

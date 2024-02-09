@@ -33,8 +33,6 @@ import com.google.gson.Gson;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import edu.txstate.reu.smartfall_multi_model_native.config.ModelConfig;
-
 public class SettingsFragment extends Fragment {
     String uuid;
     SharedPreferences pref;

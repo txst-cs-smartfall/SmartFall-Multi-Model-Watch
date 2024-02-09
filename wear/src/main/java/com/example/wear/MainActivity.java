@@ -33,6 +33,7 @@ import com.example.wear.Database.Database;
 import com.example.wear.Prediction.Prediction;
 import com.example.wear.config.ModelConfig;
 import com.example.wear.config.SmartFallConfig;
+import com.example.wear.util.Event;
 import com.google.android.gms.wearable.MessageClient;
 import com.google.android.gms.wearable.WearableListenerService;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
@@ -42,12 +43,8 @@ import java.nio.ByteBuffer;
 import java.sql.Timestamp;
 import java.util.UUID;
 
-import edu.txstate.reu.ble.BleClient;
-import edu.txstate.reu.ble.BleServer;
-import edu.txstate.reu.ble.BluetoothLe;
-import edu.txstate.reu.ble.Event;
-
-public class MainActivity extends AppCompatActivity implements BleServer.OnEventReceivedListener, AmbientModeSupport.AmbientCallbackProvider {
+public class MainActivity extends AppCompatActivity implements //BleServer.OnEventReceivedListener,
+        AmbientModeSupport.AmbientCallbackProvider {
 
     /**
      * A string TAG for debugging
@@ -218,65 +215,6 @@ public class MainActivity extends AppCompatActivity implements BleServer.OnEvent
     protected void onDestroy() {
         Log.d(TAG, "onDestroy: ");
         super.onDestroy();
-    }
-
-    @Override
-    public void onEventReceived(Event event) {
-
-        float [] data = event.getData();
-        Timestamp timestamp = event.getTimestamp();
-        String path = event.getPath();
-        Log.d(TAG, "onEventReceived:  " + data[0] + " time: "+ timestamp + " path: " + path);
-
-        switch(path) {
-            case STATE_EVENT_PATH:
-                int state = (int) data[0];
-                if (state == COLLECTION_STATE) {
-                    sensorIntent = new Intent(MainActivity.this, SensorService.class );
-                    ContextCompat.startForegroundService(MainActivity.this, sensorIntent);
-                }
-                else if(state == FEEDBACK_STATE) {
-                    stopService(sensorIntent);
-                    Intent intent = new Intent(MainActivity.this, FeedbackActivity.class);
-                    startActivity(intent);
-                }
-                else if (state == IDLE_STATE) {
-                    stopService(sensorIntent);
-                }
-
-
-        }
-    }
-
-    /**
-     * This method implements the BleClient.OnEventReceivedListener method for receiving ble
-     * connection state notifications.
-     *
-     * Upon receiving a state change notification this method relays the connection state
-     * through a toast message.
-     *
-     * @param state int: The current state of the ble connection
-     */
-    @Override
-    public void onConnectionStateChange(int state) {
-        switch (state) {
-            case BleClient.STATE_CONNECTED:
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(), "Device is now connected", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                break;
-            case BleClient.STATE_DISCONNECTED:
-                Log.d(TAG, "onConnectionStateChange: Disconnected");
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(), "Device was disconnected", Toast.LENGTH_SHORT).show();
-                    }
-                });
-        }
     }
 
     @Override

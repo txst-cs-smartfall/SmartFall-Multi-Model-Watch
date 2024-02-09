@@ -35,7 +35,7 @@ import org.json.JSONObject;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import edu.txstate.reu.ble.BluetoothLe;
+//import edu.txstate.reu.ble.BluetoothLe;
 
 public class FeedbackActivity extends AppCompatActivity implements AmbientModeSupport.AmbientCallbackProvider {
 
@@ -97,6 +97,9 @@ public class FeedbackActivity extends AppCompatActivity implements AmbientModeSu
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+                Intent intent1 = new Intent(FeedbackActivity.this, HelpAlertActivity.class);
+                startActivity(intent1);
 
                 finish();
             }

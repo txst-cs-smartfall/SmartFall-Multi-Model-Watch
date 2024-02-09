@@ -33,18 +33,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-
-import edu.txstate.reu.ble.BluetoothLe;
-import edu.txstate.reu.smartfall_multi_model_native.DataCollection.DataCollection;
-import edu.txstate.reu.smartfall_multi_model_native.Database.Database;
-import edu.txstate.reu.smartfall_multi_model_native.Prediction.Prediction;
 import edu.txstate.reu.smartfall_multi_model_native.Util.SendMessage;
-import edu.txstate.reu.smartfall_multi_model_native.config.ModelConfig;
-import edu.txstate.reu.smartfall_multi_model_native.config.SmartFallConfig;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -70,20 +59,6 @@ public class MainActivity extends AppCompatActivity {
         IntentFilter messageFilter = new IntentFilter("HelpData");
         MessageReceiver messageReceiver = new MessageReceiver();
         LocalBroadcastManager.getInstance(this).registerReceiver(messageReceiver, messageFilter);
-
-//        LocalBroadcastManager.getInstance(this).registerReceiver(
-//                helpDataReceiver, new IntentFilter("HelpData"));
-
-//        try {
-//            /** Data Collection **/
-//            DataCollection.initialize(getApplicationContext());
-//            DataCollection.start(getApplicationContext());
-//            /** Datbase **/
-//            Database.initialize(getApplicationContext());
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
         /** Bottom Navbar **/
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
@@ -121,36 +96,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static void  initializeAll(Context context){
-//        try {
-//            /** Prediction **/
-//            Prediction.initialize(context);
-//            predictionInitialized = true;
-//            ModelConfig config = ModelConfig.getModelConfig(context);
-//            config.uuid = context.getSharedPreferences("Fall_Detection",0).getString("uuid",null);
-//            if(!SmartFallConfig.MODEL_TYPE.equals("PERSONALIZED")){
-//                config.modelVersion = 0;
-//                config.newDocID = SmartFallConfig.MODEL_TYPE.toLowerCase();
-//                config.modelContent = null;
-//                config.modelWeights = null;
-//            }
-//            Prediction.updateTracker(context);
-//        } catch (Exception e){
-//            e.printStackTrace();
-//        }
-
-    }
-
     @Override
     protected void onDestroy() {
-        // Deactivate fall prediction
-//        DataCollection.setState(DataCollection.IDLE_STATE);
-////        Prediction.reset();
-//        BluetoothLe.getBleClient(getApplicationContext()).stopBleClient();
-//        SharedPreferences pref = getApplicationContext().getSharedPreferences("Fall_Detection",0);
-//        SharedPreferences.Editor editor = pref.edit();
-//        editor.putString("power", "off");
-//        editor.commit();
         super.onDestroy();
     }
 

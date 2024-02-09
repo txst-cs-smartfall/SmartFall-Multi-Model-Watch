@@ -21,8 +21,6 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.UUID;
 
-import edu.txstate.reu.smartfall_multi_model_native.config.SmartFallConfig;
-
 public class ProfileFragment extends Fragment {
     private TextInputLayout name, email, phone, contact_name, contact_email, contact_phone;
     public static final String EXTRA_UUID = "reuiot.smartwatch.ProfileSettingsActivity.EXTRA_UUID";
@@ -93,8 +91,6 @@ public class ProfileFragment extends Fragment {
                 data.putExtra(EXTRA_UUID, uuid);
 
                 Toast.makeText(container.getContext(),"Information saved.",Toast.LENGTH_SHORT).show();
-                SmartFallConfig.isFirst = true;
-                MainActivity.initializeAll(container.getContext());
 
                 FragmentTransaction fragmentTransaction = getActivity()
                         .getSupportFragmentManager().beginTransaction();

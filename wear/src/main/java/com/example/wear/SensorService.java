@@ -17,13 +17,12 @@ import android.util.Log;
 import android.util.TimeUtils;
 import android.widget.TimePicker;
 
-import edu.txstate.reu.ble.*;
-
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.wear.Prediction.Prediction;
+import com.example.wear.util.Event;
 
 import org.json.JSONException;
 import org.json.JSONObject;

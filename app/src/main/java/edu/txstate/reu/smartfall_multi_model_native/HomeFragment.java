@@ -37,13 +37,6 @@ import com.google.gson.Gson;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-
-import edu.txstate.reu.ble.BluetoothLe;
-import edu.txstate.reu.smartfall_multi_model_native.DataCollection.DataCollection;
-import edu.txstate.reu.smartfall_multi_model_native.Database.Couchbase;
-import edu.txstate.reu.smartfall_multi_model_native.Prediction.Prediction;
-import edu.txstate.reu.smartfall_multi_model_native.config.ModelConfig;
 
 
 public class HomeFragment extends Fragment {
@@ -60,11 +53,6 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(
-                accDataReceiver, new IntentFilter("AccelerometerData"));
-
-        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(
-                modelDataReceiver, new IntentFilter("modelInfo"));
         Window window = getActivity().getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -82,9 +70,6 @@ public class HomeFragment extends Fragment {
         if(uuid!=null){
             Intent data = new Intent();
             data.putExtra(EXTRA_UUID, uuid);
-            if(!MainActivity.predictionInitialized){
-                MainActivity.initializeAll(getContext());
-            }
 
             new SendThread("/user/uuid", uuid).start();
         }
@@ -144,26 +129,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(power==null || power.equals("off")){
-//                    start_time = System.currentTimeMillis();
-//                    System.out.println(start_time);
-//                    try {
-//                        powerFab.setText("Connecting");
-//                        int connectionState = BluetoothLe.getBleClient(getActivity().getApplicationContext()).checkConnectionState();
-//                        if(connectionState==0){
-//                            BluetoothLe.getBleClient(getActivity().getApplicationContext()).startBleClient(DataCollection.blePaths);
-//                            TimeUnit.SECONDS.sleep(3);
-//                        }
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                    Prediction.reset();
-//                    try {
-//                        Couchbase.deletePreviousData();
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                    DataCollection.setState(DataCollection.COLLECTION_STATE);
                     window.setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.green));
 //                    accDataView.setVisibility(View.VISIBLE);
                     powerFab.setText("Deactivate");
@@ -190,15 +155,6 @@ public class HomeFragment extends Fragment {
                     new SendThread("/user/power", "on").start();
                 }
                 else {
-                    // Deactivate fall prediction
-//                    DataCollection.setState(DataCollection.IDLE_STATE);
-//                    try {
-//                        Couchbase.writeDataInStorage();
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                    Prediction.reset();
-//                    Prediction.uploadTracker(getActivity().getApplicationContext());
 
                     accDataView.setVisibility(View.INVISIBLE);
                     window.setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.red));
@@ -230,26 +186,6 @@ public class HomeFragment extends Fragment {
         });
         return view;
     }
-
-    private BroadcastReceiver accDataReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            // Get extra data included in the Intent
-//            String message = intent.getStringExtra("data");
-//            accDataView.setText(message);
-        }
-    };
-
-    private BroadcastReceiver modelDataReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            // Get extra data included in the Intent
-            String message = intent.getStringExtra("data");
-            ModelConfig modelConfig = new Gson().fromJson(message, ModelConfig.class);
-            editor.putString("trackerId", modelConfig.trackerId);
-            editor.commit();
-        }
-    };
 
     //This actually sends the message to the wearable device.
     class SendThread extends Thread {

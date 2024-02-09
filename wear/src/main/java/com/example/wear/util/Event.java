@@ -1,8 +1,10 @@
-package edu.txstate.reu.ble;
+package com.example.wear.util;
 
 import java.nio.ByteBuffer;
 import java.sql.Timestamp;
 import java.util.UUID;
+
+//import edu.txstate.reu.ble.BleProfile;
 
 /**
  *  Represents an Event proceeding the reception of Bluetooth Low Energy data. An event is used in
@@ -40,7 +42,7 @@ public class Event {
     public Event (byte[] data, Timestamp timestamp, UUID uuid) {
         this.data = cleanData(data);
         this.timestamp = timestamp;
-        this.path = BleProfile.getPathFromUUID(uuid);
+        this.path = uuid.toString();
     }
 
     /**
@@ -82,3 +84,4 @@ public class Event {
      */
     public Timestamp getTimestamp() { return timestamp; }
 }
+

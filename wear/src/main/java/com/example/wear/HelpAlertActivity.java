@@ -23,7 +23,6 @@ import com.google.android.gms.wearable.Wearable;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import edu.txstate.reu.ble.BluetoothLe;
 
 public class HelpAlertActivity extends AppCompatActivity implements AmbientModeSupport.AmbientCallbackProvider {
     public static String datapath = "/user/uuid";
