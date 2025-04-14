@@ -24,16 +24,17 @@ public class SmartFallConfig {
      * To change strategy, just uncomment required line and comment current strategy.
      */
     //public static final String PERSONALIZED_STRATEGY  = "ENSEMBLE";
-    public static final String PERSONALIZED_STRATEGY  = "LSTM";
-
+//    public static final String PERSONALIZED_STRATEGY  = "LSTM";
+//    public static final String PERSONALIZED_STRATEGY  = "Transformer";
+    public static final String PERSONALIZED_STRATEGY  = "TransformerWSMV";
     /**
      * Below is the key we used to specify from where we will use the model.
      * To change strategy, just uncomment required line and comment current strategy.
      */
 //    public static final String MODEL_FROM  = "ONLINE";
     public static final String MODEL_FROM  = "OFFLINE";
-    public static final String OFFLINE_MODEL_FILE  = "saved_model128.tflite"; // file name in assets folder
-    public static final float OFFLINE_MODEL_THRESHOLD  = 0.9f;
+    public static final String OFFLINE_MODEL_FILE  = "watch_only_kd_128 (1).tflite"; // file name in assets folder
+    public static final float OFFLINE_MODEL_THRESHOLD  = 0.5f;
     /**
      * This is the key that holds the information about which remote server has to be accessed.
      */
@@ -51,13 +52,13 @@ public class SmartFallConfig {
     /**
      * A constant integer representing the maximum length of the alpha queue
      */
-    public static final int ALPHA_LIMIT = 20;
+    public static final int ALPHA_LIMIT = 10;
 
     /**
      * A constant integer representing the maximum length of a beta queue.
      * It is also considered as the window size.
      */
-    public static final int BETA_LIMIT = 128;
+    public static final int BETA_LIMIT = 64;
 
     public static final int STEP_SIZE = 10;
 

@@ -7,6 +7,8 @@ import android.util.Log;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.example.wear.Database.Couchbase;
+import com.example.wear.config.ModelConfig;
 import com.example.wear.config.SmartFallConfig;
 import com.google.gson.Gson;
 
@@ -22,15 +24,12 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.example.wear.Database.Couchbase;
-import com.example.wear.config.ModelConfig;
-
 /**
  * This class is responsible for making inference if the personalization strategy is LSTM.
  */
-public class PersonalizedPredictionLSTM {
+public class PersonalizedPredictionTransformer {
 
-    private static final String TAG = "PersonalizedPredictionLSTM";
+    private static final String TAG = "PersonalizedPredictionTransformer";
     private static ArrayList<Interpreter> interpreters = new ArrayList<>();
     private static float[] MODEL_WEIGHTS = {1.0f};
     private static float[] MODEL_THRESHOLDS = {0.20f};

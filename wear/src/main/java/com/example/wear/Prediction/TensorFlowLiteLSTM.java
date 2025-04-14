@@ -14,10 +14,6 @@ import java.util.ArrayList;
 /**
  *  This class utilizes the TensorFlow-lite API to make inferences on
  *  float data.
- *
- *  @author Bhargav Balusu (b_b515)
- *  @version 1.0
- *  @since 2022.05.15
  **/
 public class TensorFlowLiteLSTM {
 

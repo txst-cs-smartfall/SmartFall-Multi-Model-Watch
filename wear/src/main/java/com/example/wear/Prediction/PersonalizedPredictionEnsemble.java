@@ -17,10 +17,6 @@ import com.example.wear.config.ModelConfig;
 
 /**
  * This class is responsible for making inference if the personalization strategy is ENSEMBLE.
- *
- * @author Bhargav Balusu (b_b515)
- * @version 1.0
- * @since 2022.05.15
  */
 public class PersonalizedPredictionEnsemble {
 

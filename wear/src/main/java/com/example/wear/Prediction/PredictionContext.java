@@ -9,10 +9,6 @@ import com.example.wear.config.SmartFallConfig;
 /**
  * This class context class for top level prediction strategy. This class initializes the respective strategy class based on the
  * configuration provided in SmartFallConfig.java
- *
- * @author Bhargav Balusu (b_b515)
- * @version 1.0
- * @since 2022.05.15
  */
 public class PredictionContext {
 

@@ -36,8 +36,8 @@ dependencies {
 //    implementation project(path: ':BluetoothLe')
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'org.tensorflow:tensorflow-lite:2.12.0'
-    implementation 'org.tensorflow:tensorflow-lite-select-tf-ops:2.12.0'
+    implementation 'org.tensorflow:tensorflow-lite:2.13.0'
+    implementation 'org.tensorflow:tensorflow-lite-select-tf-ops:2.13.0'
     implementation 'com.couchbase.lite:couchbase-lite-android:2.8.0'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.6'
     implementation 'androidx.annotation:annotation:1.0.2'

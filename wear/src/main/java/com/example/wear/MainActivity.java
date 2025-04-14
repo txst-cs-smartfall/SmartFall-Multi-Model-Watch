@@ -39,6 +39,7 @@ import com.google.android.gms.wearable.WearableListenerService;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.sql.Timestamp;
 import java.util.UUID;
@@ -272,7 +273,16 @@ public class MainActivity extends AppCompatActivity implements //BleServer.OnEve
                     feedbackEnabled = false;
                     Prediction.uploadTracker(context);
                     stopService(sensorIntent);
-                    Prediction.reset();
+//                    try {
+//                        Prediction.reset();
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+                    try {
+                        Prediction.initialize(context);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     tv2.setText("Deactivated");
                     tv2.setVisibility(TextView.INVISIBLE);
                 }

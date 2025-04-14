@@ -7,6 +7,8 @@ import android.util.Log;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.example.wear.Database.Couchbase;
+import com.example.wear.config.ModelConfig;
 import com.example.wear.config.SmartFallConfig;
 import com.google.gson.Gson;
 
@@ -22,15 +24,12 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.example.wear.Database.Couchbase;
-import com.example.wear.config.ModelConfig;
-
 /**
  * This class is responsible for making inference if the personalization strategy is LSTM.
  */
-public class PersonalizedPredictionLSTM {
+public class PersonalizedPredictionTransformerWsmv {
 
-    private static final String TAG = "PersonalizedPredictionLSTM";
+    private static final String TAG = "PersonalizedPredictionTransformerWsmv";
     private static ArrayList<Interpreter> interpreters = new ArrayList<>();
     private static float[] MODEL_WEIGHTS = {1.0f};
     private static float[] MODEL_THRESHOLDS = {0.20f};
@@ -287,8 +286,19 @@ public class PersonalizedPredictionLSTM {
      * @return float: Three-dimensional float array
      */
     private static float[][][] flattenInputTo3D(float[][] samples) {
-        float[][][] multiDimArray = new float[1][samples.length][samples[0].length];
-        multiDimArray[0] = samples;
+        int size = samples.length;
+        int features = samples[0].length+1;
+        float[][][] multiDimArray = new float[1][size][features];
+        for(int i=0;i<samples.length;i++) {
+            float acc_x = samples[i][0];
+            float acc_y = samples[i][1];
+            float acc_z = samples[i][2];
+            multiDimArray[0][i][0] = acc_x;
+            multiDimArray[0][i][1] = acc_y;
+            multiDimArray[0][i][2] = acc_z;
+            multiDimArray[0][i][3] = (float) Math.sqrt(acc_x*acc_x+acc_y*acc_y+acc_z*acc_z);
+        }
+
         return multiDimArray;
     }
 
